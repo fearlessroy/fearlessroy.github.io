@@ -89,11 +89,12 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/01/28/mysql-error35/error.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/28/mysql-error35/errorinfo.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/28/mysql-error35/unload.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/28/mysql-error35/check.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/28/mysql-error35/loadps.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/28/mysql-error35/loadpsunload.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/28/mysql-error35/success.png">
-<meta property="og:updated_time" content="2018-01-28T09:55:46.467Z">
+<meta property="og:updated_time" content="2018-01-28T12:18:15.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS X环境下MySQL启动报错,InnoDB: Unable to lock .&#x2F;ibdata1 error:35">
 <meta name="twitter:description" content="OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35在新的Mac下，执行 ./mysql.server start 启动MySQL数据库时，报以下错误：表示服务退出时没有更新PID文件，emmm…,有些不知所云。 打开日志文件，发现报错的同时终端打印：在网上搜索一番之后，表示可能有另外一个mysqld进程占用了该文件，于是使用 ps">
@@ -362,7 +363,7 @@
         <h1 id="OS-X环境下MySQL启动报错：InnoDB-Unable-to-lock-ibdata1-error-35"><a href="#OS-X环境下MySQL启动报错：InnoDB-Unable-to-lock-ibdata1-error-35" class="headerlink" title="OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35"></a>OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35</h1><p>在新的Mac下，执行 ./mysql.server start 启动MySQL数据库时，报以下错误：<br><img src="/2018/01/28/mysql-error35/error.png">表示服务退出时没有更新PID文件，emmm…,有些不知所云。</p>
 <p>打开日志文件，发现报错的同时终端打印：<br><img src="/2018/01/28/mysql-error35/errorinfo.png">在网上搜索一番之后，表示可能有另外一个mysqld进程占用了该文件，于是使用 ps 命令查看，果然有一个mysqld进程在运行，于是用 kill -9 PID 命令强制退出，可是当再次 ps 时，仍然发现后一个进程在那，只是进程号发生的改变，这就有点意思了。</p>
 <p>继续上网搜索解决方案，在刘志军(foofish.net)的一篇博文中找到了一个解决方案。</p>
-<p>原来MySQL在OS X系统的启动方式和Linux的启动方式不同，在OS X中关闭MySQL的正确方法是：<br><img src="/2018/01/28/mysql-error35/check.png">这次无法kill的mysqld进程就消失了，接着启动MySQL：<br><img src="/2018/01/28/mysql-error35/loadps.png">其实在使用完 upload 命令之后，也可以使用原来的命令启动MySQL服务：<br><img src="/2018/01/28/mysql-error35/loadpsunload.png"><img src="/2018/01/28/mysql-error35/success.png">这样也是可以成功的。</p>
+<p>原来MySQL在OS X系统的启动方式和Linux的启动方式不同，在OS X中关闭MySQL的正确方法是：<br><img src="/2018/01/28/mysql-error35/unload.png"><img src="/2018/01/28/mysql-error35/check.png">这次无法kill的mysqld进程就消失了，接着启动MySQL：<br><img src="/2018/01/28/mysql-error35/loadps.png">其实在使用完 upload 命令之后，也可以使用原来的命令启动MySQL服务：<br><img src="/2018/01/28/mysql-error35/loadpsunload.png"><img src="/2018/01/28/mysql-error35/success.png">这样也是可以成功的。</p>
 <h1 id="Mac-OS下的LAUNCHD"><a href="#Mac-OS下的LAUNCHD" class="headerlink" title="Mac OS下的LAUNCHD"></a>Mac OS下的LAUNCHD</h1><p>launchd是Mac OS下，用于初始化系统环境的关键进程。类似Linux下的init。<br>launchd根据 ?/System/Library/LaunchAgents ,?/System/Library/LaunchDaemons , ?/Library/LaunchDaemons,?Library/LaunchAgents , ~/Library/LaunchAgents?里的plist配置，启动服务守护进程。<br>使用launchctl来加载和卸载配置文件，加载后程序启动，卸载后程序关闭。</p>
 
       
