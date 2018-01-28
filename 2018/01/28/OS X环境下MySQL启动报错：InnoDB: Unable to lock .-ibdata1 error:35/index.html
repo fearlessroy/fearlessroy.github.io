@@ -79,16 +79,25 @@
 
 
 
-<meta name="description" content="技术输出和个人感悟">
-<meta property="og:type" content="website">
+<meta name="description" content="OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35在新的Mac下，执行 ./mysql.server start 启动MySQL数据库时，报以下错误：表示服务退出时没有更新PID文件，emmm…,有些不知所云。 打开日志文件，发现报错的同时终端打印： 在网上搜索一番之后，表示可能有另外一个mysqld进程占用了该文件，于是使用 ps">
+<meta property="og:type" content="article">
 <meta property="og:title" content="罗伊日常">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/01/28/OS X环境下MySQL启动报错：InnoDB: Unable to lock .-ibdata1 error:35/index.html">
 <meta property="og:site_name" content="罗伊日常">
-<meta property="og:description" content="技术输出和个人感悟">
+<meta property="og:description" content="OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35在新的Mac下，执行 ./mysql.server start 启动MySQL数据库时，报以下错误：表示服务退出时没有更新PID文件，emmm…,有些不知所云。 打开日志文件，发现报错的同时终端打印： 在网上搜索一番之后，表示可能有另外一个mysqld进程占用了该文件，于是使用 ps">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/01/28/OS%20X环境下MySQL启动报错：InnoDB:%20Unable%20to%20lock%20.-ibdata1%20error:35/media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.43.45.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/28/OS%20X环境下MySQL启动报错：InnoDB:%20Unable%20to%20lock%20.-ibdata1%20error:35/media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.45.29.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/28/OS%20X环境下MySQL启动报错：InnoDB:%20Unable%20to%20lock%20.-ibdata1%20error:35/media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.44.11.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/28/OS%20X环境下MySQL启动报错：InnoDB:%20Unable%20to%20lock%20.-ibdata1%20error:35/media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.44.34.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/28/OS%20X环境下MySQL启动报错：InnoDB:%20Unable%20to%20lock%20.-ibdata1%20error:35/media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.44.49.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/28/OS%20X环境下MySQL启动报错：InnoDB:%20Unable%20to%20lock%20.-ibdata1%20error:35/media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.44.11.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/28/OS%20X环境下MySQL启动报错：InnoDB:%20Unable%20to%20lock%20.-ibdata1%20error:35/media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.45.19.png">
+<meta property="og:updated_time" content="2018-01-28T08:37:25.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="罗伊日常">
-<meta name="twitter:description" content="技术输出和个人感悟">
+<meta name="twitter:description" content="OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35在新的Mac下，执行 ./mysql.server start 启动MySQL数据库时，报以下错误：表示服务退出时没有更新PID文件，emmm…,有些不知所云。 打开日志文件，发现报错的同时终端打印： 在网上搜索一番之后，表示可能有另外一个mysqld进程占用了该文件，于是使用 ps">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/28/OS%20X环境下MySQL启动报错：InnoDB:%20Unable%20to%20lock%20.-ibdata1%20error:35/media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.43.45.png">
 
 
 
@@ -118,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/28/OS X环境下MySQL启动报错：InnoDB: Unable to lock .-ibdata1 error:35/"/>
 
 
 
 
 
-  <title>罗伊日常</title>
+  <title> | 罗伊日常</title>
   
 
 
@@ -143,8 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +255,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -279,9 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/28/OS X环境下MySQL启动报错：InnoDB: Unable to lock .-ibdata1 error:35/" itemprop="url">未命名</a></h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -331,19 +337,14 @@
       
 
       
-        
-          
-          OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35在新的Mac下，执行 ./mysql.server start 启动MySQL数据库时，报以下错误：表示服务退出时没有更新PID文件，emmm…,有些不知所云。
-打开日志文件，发现报错
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/28/OS X环境下MySQL启动报错：InnoDB: Unable to lock .-ibdata1 error:35/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h1 id="OS-X环境下MySQL启动报错：InnoDB-Unable-to-lock-ibdata1-error-35"><a href="#OS-X环境下MySQL启动报错：InnoDB-Unable-to-lock-ibdata1-error-35" class="headerlink" title="OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35"></a>OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35</h1><p>在新的Mac下，执行 ./mysql.server start 启动MySQL数据库时，报以下错误：<br><img src="media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.43.45.png" alt="屏幕快照 2018-01-23 下午10.43.45"><br>表示服务退出时没有更新PID文件，emmm…,有些不知所云。</p>
+<p>打开日志文件，发现报错的同时终端打印：<br><img src="media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.45.29.png" alt="屏幕快照 2018-01-23 下午10.45.29"></p>
+<p>在网上搜索一番之后，表示可能有另外一个mysqld进程占用了该文件，于是使用 ps 命令查看，果然有一个mysqld进程在运行，于是用 kill -9 PID 命令强制退出，可是当再次 ps 时，仍然发现后一个进程在那，只是进程号发生的改变，这就有点意思了。</p>
+<p>继续上网上网搜索解决方案，在刘志军(foofish.net)的一篇博文中找到了一个解决方案。</p>
+<p>原来MySQL在OS X系统的启动方式和Linux的启动方式不同，在OS X中关闭MySQL的正确方法是：<br><img src="media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.44.11.png" alt="屏幕快照 2018-01-23 下午10.44.11"><br><img src="media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.44.34.png" alt="屏幕快照 2018-01-23 下午10.44.34"><br>这次无法kill的mysqld进程就消失了，接着启动MySQL：<br><img src="media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.44.49.png" alt="屏幕快照 2018-01-23 下午10.44.49"></p>
+<p>其实在使用完 upload 命令之后，也可以使用原来的命令启动MySQL服务：<br><img src="media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.44.11.png" alt="屏幕快照 2018-01-23 下午10.44.11"><br><img src="media/15171255319991/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8810.45.19.png" alt="屏幕快照 2018-01-23 下午10.45.19"><br>这样也是可以成功的。</p>
+<p>##Mac OS下的LAUNCHD<br>launchd是Mac OS下，用于初始化系统环境的关键进程。类似Linux下的init。<br>launchd根据 ?/System/Library/LaunchAgents ,?/System/Library/LaunchDaemons , ?/Library/LaunchDaemons,?Library/LaunchAgents , ~/Library/LaunchAgents?里的plist配置，启动服务守护进程。<br>使用launchctl来加载和卸载配置文件，加载后程序启动，卸载后程序关闭。</p>
+
       
     </div>
     
@@ -360,138 +361,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/28/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fearlessroy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="罗伊日常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/28/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T13:52:44+08:00">
-                2018-01-28
-              </time>
+              <a href="/2018/01/28/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/28/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -501,10 +392,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -512,6 +404,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -532,8 +428,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -591,6 +496,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OS-X环境下MySQL启动报错：InnoDB-Unable-to-lock-ibdata1-error-35"><span class="nav-number">1.</span> <span class="nav-text">OS X环境下MySQL启动报错：InnoDB: Unable to lock ./ibdata1 error:35</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -731,6 +652,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
