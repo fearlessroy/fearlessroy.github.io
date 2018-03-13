@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Backend, fearlessroy" />
+  <meta name="keywords" content="mybatis," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="技术输出和个人感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="罗伊日常">
-<meta property="og:url" content="http://yoursite.com/categories/数据库/index.html">
+<meta name="description" content="字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断” 问题描述：当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新update_time，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，我们对某个实体set了需要更新的新值（没有set u">
+<meta name="keywords" content="mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Mybatis-Plus字段策略与数据库自动更新时间的一些问题">
+<meta property="og:url" content="http://yoursite.com/2018/03/13/mybatis-plus/index.html">
 <meta property="og:site_name" content="罗伊日常">
-<meta property="og:description" content="技术输出和个人感悟">
+<meta property="og:description" content="字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断” 问题描述：当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新update_time，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，我们对某个实体set了需要更新的新值（没有set u">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-13T14:13:05.777Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="罗伊日常">
-<meta name="twitter:description" content="技术输出和个人感悟">
+<meta name="twitter:title" content="关于Mybatis-Plus字段策略与数据库自动更新时间的一些问题">
+<meta name="twitter:description" content="字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断” 问题描述：当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新update_time，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，我们对某个实体set了需要更新的新值（没有set u">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/数据库/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/13/mybatis-plus/"/>
 
 
 
 
 
-  <title>分类: 数据库 | 罗伊日常</title>
+  <title>关于Mybatis-Plus字段策略与数据库自动更新时间的一些问题 | 罗伊日常</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,55 +249,175 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>数据库<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/mybatis-plus/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fearlessroy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="罗伊日常">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/01/28/mysql-error35/" itemprop="url">
-              
-                <span itemprop="name">OS X环境下MySQL启动报错,InnoDB: Unable to lock ./ibdata1 error:35</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">关于Mybatis-Plus字段策略与数据库自动更新时间的一些问题</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-28T16:54:59+08:00"
-              content="2018-01-28" >
-          01-28
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T22:05:00+08:00">
+                2018-03-13
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”"><a href="#字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”" class="headerlink" title="字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”"></a>字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”</h2><ul>
+<li>问题描述：<br>当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新update_time，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，我们对某个实体set了需要更新的新值（没有set update_time），这时候因为好似忽略判断，数据库(我这里是MySql)是会将<strong>空值覆盖update_time列</strong>，从而出现问题。</li>
+<li><p>解决方法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Component       </span><br><span class="line">public class MyMetaObjectHandler extends MetaObjectHandler &#123;      </span><br><span class="line">//新增填充    </span><br><span class="line">@Override     </span><br><span class="line">public void insertFill(MetaObject metaObject)&#123;    </span><br><span class="line">	// 获取当前时间，自动更新以下数据库字段       </span><br><span class="line">	setFieldValByName(&quot;updateTime&quot;, new Date(), metaObject);     </span><br><span class="line">&#125;   </span><br><span class="line">//更新填充    </span><br><span class="line">@Override     </span><br><span class="line">public void updateFill(MetaObject metaObj ct) &#123;     </span><br><span class="line">	// 获取当前时间，自动更新以下数据库字段     </span><br><span class="line">	setFieldValByName(&quot;updateTime&quot;, new Date(), metaObject);     </span><br><span class="line">&#125;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>新增一个Component,继承MetaObjectHandler，重写insertFill()和updateFill()两个方法，自定义插入和更新规则</p>
+</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/14/openresty-quick-start/" rel="next" title="openresty-quick-start">
+                <i class="fa fa-chevron-left"></i> openresty-quick-start
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -303,6 +425,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -323,8 +449,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -400,6 +535,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”"><span class="nav-number">1.</span> <span class="nav-text">字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -540,6 +691,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
