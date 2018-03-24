@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="罗伊日常">
 <meta property="og:description" content="字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断” 问题描述：当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新update_time，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，业务逻辑要更新字段（没有主动设置 update_ti">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-14T15:30:32.059Z">
+<meta property="og:updated_time" content="2018-03-24T09:37:57.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于Mybatis-Plus字段策略与数据库自动更新时间的一些问题">
 <meta name="twitter:description" content="字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断” 问题描述：当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新update_time，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，业务逻辑要更新字段（没有主动设置 update_ti">
@@ -353,11 +353,19 @@
 
       
         <h2 id="字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”"><a href="#字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”" class="headerlink" title="字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”"></a>字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”</h2><ul>
-<li>问题描述：<br>当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新<code>update_time</code>，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，业务逻辑要更新字段（没有主动设置 <code>update_time</code>），这时候因为忽略判断，数据库(我这里是MySql)是<strong>不会去更新update_time的，即使这个字段在数据库中是这样定义的：<code>update_time</code> datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE</strong>，从而出现问题。<br>当字段策略为 2 “非空判断” 的时候，以上场景就是用空值刷新数据库字段，因为业务代码中并没有设置更新<code>update_time</code>，此时实体中这个属性为空。</li>
-<li><p>解决方法  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Component       </span><br><span class="line">public class MyMetaObjectHandler extends MetaObjectHandler &#123;      </span><br><span class="line">//新增填充    </span><br><span class="line">@Override     </span><br><span class="line">public void insertFill(MetaObject metaObject)&#123;    </span><br><span class="line">	// 获取当前时间，自动更新以下数据库字段       </span><br><span class="line">	setFieldValByName(&quot;updateTime&quot;, new Date(), metaObject);     </span><br><span class="line">&#125;   </span><br><span class="line">//更新填充    </span><br><span class="line">@Override     </span><br><span class="line">public void updateFill(MetaObject metaObj ct) &#123;     </span><br><span class="line">	// 获取当前时间，自动更新以下数据库字段     </span><br><span class="line">	setFieldValByName(&quot;updateTime&quot;, new Date(), metaObject);     </span><br><span class="line">&#125;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>新增一个Component,继承MetaObjectHandler，重写insertFill()和updateFill()两个方法，自定义插入和更新规则，继承基类中的这两个方法都没有实现代码。</p>
+<li><p>问题描述：<br>当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新<code>update_time</code>，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，业务逻辑要更新字段（没有主动设置 <code>update_time</code>），这时候因为忽略判断，数据库(我这里是MySql)是<strong>不会去更新update_time的，即使这个字段在数据库中是这样定义的：<code>update_time</code> datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE</strong>，在这种字段策略下，该字段会被设为null，具体的执行语句时insert into table(….,update_time) values(…,null)。   </p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
+<li>实现MetaObjectHandler的insertFill()方法和updateFill()方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Component       </span><br><span class="line">public class MyMetaObjectHandler extends MetaObjectHandler &#123;      </span><br><span class="line">//新增填充    </span><br><span class="line">@Override     </span><br><span class="line">public void insertFill(MetaObject metaObject)&#123;    </span><br><span class="line">	// 获取当前时间，自动更新以下数据库字段       </span><br><span class="line">	setFieldValByName(&quot;updateTime&quot;, new Date(), metaObject);     </span><br><span class="line">&#125;   </span><br><span class="line">//更新填充    </span><br><span class="line">@Override     </span><br><span class="line">public void updateFill(MetaObject metaObj ct) &#123;     </span><br><span class="line">	// 获取当前时间，自动更新以下数据库字段     </span><br><span class="line">	setFieldValByName(&quot;updateTime&quot;, new Date(), metaObject);     </span><br><span class="line">&#125;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<p>新增一个Component,继承MetaObjectHandler，重写insertFill()和updateFill()两个方法，自定义插入和更新规则，继承基类中的这两个方法都为空。</p>
+<ol>
+<li>将字段策略设为 2 “非空判断”<br>这时候，无论是插入还是更新语句都只会完成对已设置具体值得属性进行操作。例如：表中除了update_time以外，还有user_name字段，我们在代码中设置了这个字段的值，那么在insert的时候执行的语句是: insert into table (user_name) valuse(userName),而不会去对没有设置值得字段做任何操作，这样，有关时间的字段就可以直接交给数据库了。</li>
+</ol>
+</li>
+</ul>
+<h2 id="字段策略为-““非空判断””-的一个问题"><a href="#字段策略为-““非空判断””-的一个问题" class="headerlink" title="字段策略为 ““非空判断”” 的一个问题"></a>字段策略为 ““非空判断”” 的一个问题</h2><ul>
+<li>假设有个Entity User，这个Entity<strong>属性没有默认值</strong>，我们 new 一个实例，User user = new User(),然后啥也没做，调用UserService.insert()，这时候就会出现一个问题，Mybatis-plus不知道你想插入哪些值，因为没有显示setter，这是一个需要注意的问题。</li>
 </ul>
 
       
@@ -549,7 +557,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”"><span class="nav-number">1.</span> <span class="nav-text">字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”"><span class="nav-number">1.</span> <span class="nav-text">字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字段策略为-““非空判断””-的一个问题"><span class="nav-number">3.</span> <span class="nav-text">字段策略为 ““非空判断”” 的一个问题</span></a></li></ol></div>
             
 
           </div>
