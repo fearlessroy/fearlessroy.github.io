@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] args)&amp;#123;		Syste">
+<meta name="description" content="常量折叠 请看以下一段代码: 1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] arg">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中的常量折叠">
 <meta property="og:url" content="http://yoursite.com/2018/03/25/constantsFolding/index.html">
 <meta property="og:site_name" content="罗伊日常">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] args)&amp;#123;		Syste">
+<meta property="og:description" content="常量折叠 请看以下一段代码: 1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] arg">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-25T09:36:05.364Z">
+<meta property="og:updated_time" content="2018-03-25T09:47:38.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的常量折叠">
-<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] args)&amp;#123;		Syste">
+<meta name="twitter:description" content="常量折叠 请看以下一段代码: 1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] arg">
 
 
 
@@ -303,6 +303,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -330,11 +352,15 @@
       
 
       
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFinal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 知识点： 针对基本类型和String的常量折叠优化</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> :2,100,200,test</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(Test1.a);</span><br><span class="line">		System.out.println(Test2.a);</span><br><span class="line">		System.out.println(Test3.a);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test1</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> Integer a = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"2"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test2</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> a = <span class="number">200</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"3"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> String a = <span class="string">"test"</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"4"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上这段代码的输出是：2，100，200，test<br>造成这个结果又两个知识点：        </p>
+        <h2 id="常量折叠"><a href="#常量折叠" class="headerlink" title="常量折叠"></a>常量折叠</h2><ul>
+<li>请看以下一段代码:</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFinal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 知识点： 针对基本类型和String的常量折叠优化</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> :2,100,200,test</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(Test1.a);</span><br><span class="line">		System.out.println(Test2.a);</span><br><span class="line">		System.out.println(Test3.a);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test1</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> Integer a = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"2"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test2</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> a = <span class="number">200</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"3"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> String a = <span class="string">"test"</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"4"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以上这段代码的输出是：2，100，200，test<br>造成这个结果有两个知识点：        </p>
 <ol>
 <li><strong>对象的初始化顺序</strong>:首先执行父类静态的内容，父类静态的内容执行完毕后，接着去执行子类的静态的内容，当子类的静态内容执行完毕之后，再去看父类有没有非静态代码块，如果有就执行父类的非静态代码块，父类的非静态代码块执行完毕，接着执行父类的构造方法；父类的构造方法执行完毕之后，它接着去看子类有没有非静态代码块，如果有就执行子类的非静态代码块。子类的非静态代码块执行完毕再去执行子类的构造方法。<strong>总之一句话，静态代码块内容先执行</strong>，接着执行父类非静态代码块和构造方法，然后执行子类非静态代码块和构造方法。</li>
-<li><strong>常量折叠(constant folding)是javac里为数不多的优化，ConstantValue的属性值只限于基本类型和String，要求在编译的时候能看到常量比如说，Test2.a的int字段，javac在编译的时候能看到a的值就是200而Test1.a的Integer字段是在class initializer里被赋值的</strong></li>
+<li><strong>常量折叠(constant folding)是javac里为数不多的优化，ConstantValue的属性值只限于基本类型和String，要求在编译的时候能看到常量比如说，Test2.a的int字段，javac在编译的时候能看到a的值就是200而Test1.a的Integer字段是在class initializer里被赋值的。</strong></li>
 </ol>
 
       
@@ -426,8 +452,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -453,7 +488,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -503,6 +538,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量折叠"><span class="nav-number">1.</span> <span class="nav-text">常量折叠</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
