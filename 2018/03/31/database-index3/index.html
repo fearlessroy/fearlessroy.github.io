@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数">
+<meta name="description" content="最左前缀原理全列匹配按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。最左前缀匹配当查询条件精确匹配索引的左边连续一个或几个列时，注意是连续，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库索引">
-<meta property="og:url" content="http://yoursite.com/2018/03/31/database-index/index.html">
+<meta property="og:title" content="MySQL索引使用策略">
+<meta property="og:url" content="http://yoursite.com/2018/03/31/database-index3/index.html">
 <meta property="og:site_name" content="罗伊日常">
-<meta property="og:description" content="索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数">
+<meta property="og:description" content="最左前缀原理全列匹配按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。最左前缀匹配当查询条件精确匹配索引的左边连续一个或几个列时，注意是连续，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T07:02:04.583Z">
+<meta property="og:updated_time" content="2018-03-31T07:22:21.319Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库索引">
-<meta name="twitter:description" content="索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数">
+<meta name="twitter:title" content="MySQL索引使用策略">
+<meta name="twitter:description" content="最左前缀原理全列匹配按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。最左前缀匹配当查询条件精确匹配索引的左边连续一个或几个列时，注意是连续，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/31/database-index/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/31/database-index3/"/>
 
 
 
 
 
-  <title>数据库索引 | 罗伊日常</title>
+  <title>MySQL索引使用策略 | 罗伊日常</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/31/database-index/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/31/database-index3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fearlessroy">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库索引</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL索引使用策略</h1>
         
 
         <div class="post-meta">
@@ -292,7 +292,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-31T13:45:54+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-31T15:04:18+08:00">
                 2018-03-31
               </time>
             
@@ -352,9 +352,8 @@
       
 
       
-        <h2 id="索引的本质"><a href="#索引的本质" class="headerlink" title="索引的本质"></a>索引的本质</h2><p>MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。<br><strong>索引本质：一种数据结构。</strong><br>查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数据之外，数据库系统维护着满足特定算法的数据结构，这些数据结构以某种方式引用数据，这样就可以在这些数据结构上实现高级查找算法，这种数据结构就是索引。</p>
-<h2 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B+Tree"></a>B+Tree</h2><p>一般数据库系统使用B+Tree结构，并且对B+Tree进行了优化。<br><strong>在B+Tree的每个叶子节点增加一个指向相邻叶子节点的指针，这种优化提升了区间访问的性能。</strong></p>
-<h2 id="索引文件和磁盘存取"><a href="#索引文件和磁盘存取" class="headerlink" title="索引文件和磁盘存取"></a>索引文件和磁盘存取</h2><p><strong>索引文件本身很大，以文件形式存储在磁盘上。</strong><br>索引检索需要磁盘I/O，磁盘I/O存在机械运动耗费，因此磁盘I/O时间消耗很大。<br>为了提高效率，应该减少I/O操作，为了达到这个目的，磁盘往往不是按需读取，而是<strong>预读</strong>，这样做是因为局部性原理。<br><strong>程序所需数据往往比较集中，当一个数据被用到时，其附近的数据也会被用到</strong></p>
+        <h2 id="最左前缀原理"><a href="#最左前缀原理" class="headerlink" title="最左前缀原理"></a>最左前缀原理</h2><p><strong>全列匹配</strong><br>按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。<br><strong>最左前缀匹配</strong><br>当查询条件精确匹配索引的左边<strong>连续一个或几个列</strong>时，注意是<strong>连续</strong>，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。<br><strong>查询条件没有指定索引第一列</strong><br>由于不是最左前缀，索引这样的查询用不到索引。<br><strong>匹配某列前缀字符串</strong><br>如果通配符%不出现在开头，则可以用到索引，但根据具体情况不同可能只会用其中一个前缀。<br><strong>范围查询</strong><br>范围列可以用到索引（必须是最左前缀），但是范围列后面的列无法用到索引。同时，索引最多用于一个范围列，因此如果查询条件中有两个范围列则无法全用到索引。<br><strong>BETWEEN</strong><br>“BETWEEN”实际上相当于“IN”，也就是说实际是多值精确匹配。<br><strong>查询条件中含有函数或表达式</strong><br>如果查询条件中含有函数或表达式，则MySQL不会为这列使用索引。       </p>
+<h2 id="索引选择性"><a href="#索引选择性" class="headerlink" title="索引选择性"></a>索引选择性</h2><p>索引的选择性（Selectivity），是指不重复的索引值（也叫基数，Cardinality）与表记录数（#T）的比值：<br>Index Selectivity = Cardinality / #T<br>显然选择性的取值范围为(0, 1]，选择性越高的索引价值越大，这里可以思考一下性别列是否可以选择作为索引。</p>
 
       
     </div>
@@ -385,8 +384,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/25/constantsFolding/" rel="next" title="Java中的常量折叠">
-                <i class="fa fa-chevron-left"></i> Java中的常量折叠
+              <a href="/2018/03/31/database-index2/" rel="next" title="MySQL索引实现">
+                <i class="fa fa-chevron-left"></i> MySQL索引实现
               </a>
             
           </div>
@@ -394,10 +393,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/31/database-index2/" rel="prev" title="MySQL索引实现">
-                MySQL索引实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -545,7 +540,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的本质"><span class="nav-number">1.</span> <span class="nav-text">索引的本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-Tree"><span class="nav-number">2.</span> <span class="nav-text">B+Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引文件和磁盘存取"><span class="nav-number">3.</span> <span class="nav-text">索引文件和磁盘存取</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#最左前缀原理"><span class="nav-number">1.</span> <span class="nav-text">最左前缀原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引选择性"><span class="nav-number">2.</span> <span class="nav-text">索引选择性</span></a></li></ol></div>
             
 
           </div>
