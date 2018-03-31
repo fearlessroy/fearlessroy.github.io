@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本篇文章主要以MySQL为例 索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可">
+<meta name="description" content="索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库索引(1)">
+<meta property="og:title" content="数据库索引">
 <meta property="og:url" content="http://yoursite.com/2018/03/31/database-index/index.html">
 <meta property="og:site_name" content="罗伊日常">
-<meta property="og:description" content="本篇文章主要以MySQL为例 索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可">
+<meta property="og:description" content="索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T06:07:55.632Z">
+<meta property="og:updated_time" content="2018-03-31T07:02:04.583Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库索引(1)">
-<meta name="twitter:description" content="本篇文章主要以MySQL为例 索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可">
+<meta name="twitter:title" content="数据库索引">
+<meta name="twitter:description" content="索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>数据库索引(1) | 罗伊日常</title>
+  <title>数据库索引 | 罗伊日常</title>
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库索引(1)</h1>
+          <h1 class="post-title" itemprop="name headline">数据库索引</h1>
         
 
         <div class="post-meta">
@@ -352,8 +352,7 @@
       
 
       
-        <p>本篇文章主要以MySQL为例</p>
-<h2 id="索引的本质"><a href="#索引的本质" class="headerlink" title="索引的本质"></a>索引的本质</h2><p>MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。<br><strong>索引本质：一种数据结构。</strong><br>查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数据之外，数据库系统维护着满足特定算法的数据结构，这些数据结构以某种方式引用数据，这样就可以在这些数据结构上实现高级查找算法，这种数据结构就是索引。</p>
+        <h2 id="索引的本质"><a href="#索引的本质" class="headerlink" title="索引的本质"></a>索引的本质</h2><p>MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。<br><strong>索引本质：一种数据结构。</strong><br>查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数据之外，数据库系统维护着满足特定算法的数据结构，这些数据结构以某种方式引用数据，这样就可以在这些数据结构上实现高级查找算法，这种数据结构就是索引。</p>
 <h2 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B+Tree"></a>B+Tree</h2><p>一般数据库系统使用B+Tree结构，并且对B+Tree进行了优化。<br><strong>在B+Tree的每个叶子节点增加一个指向相邻叶子节点的指针，这种优化提升了区间访问的性能。</strong></p>
 <h2 id="索引文件和磁盘存取"><a href="#索引文件和磁盘存取" class="headerlink" title="索引文件和磁盘存取"></a>索引文件和磁盘存取</h2><p><strong>索引文件本身很大，以文件形式存储在磁盘上。</strong><br>索引检索需要磁盘I/O，磁盘I/O存在机械运动耗费，因此磁盘I/O时间消耗很大。<br>为了提高效率，应该减少I/O操作，为了达到这个目的，磁盘往往不是按需读取，而是<strong>预读</strong>，这样做是因为局部性原理。<br><strong>程序所需数据往往比较集中，当一个数据被用到时，其附近的数据也会被用到</strong></p>
 
@@ -395,6 +394,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/31/database-index2/" rel="prev" title="MySQL索引实现">
+                MySQL索引实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -471,7 +474,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
