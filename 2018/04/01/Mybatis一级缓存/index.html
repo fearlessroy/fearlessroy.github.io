@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="罗伊日常">
 <meta property="og:description" content="Mybatis一级缓存Mybatis 提供了一级缓存方案来优化在数据库会话中重复查询的问题。实现方式是每个 SqlSession 中都持有自己的缓存。     一级缓存有两种级别：       SESSION 级别，在一个 Mybatis 会话中执行的所有语句，都会共享这个缓存。 STATEMENT 级别，缓存只对当前执行的 statement 有效。       每个 SqlSession 中拥">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-02T00:09:22.489Z">
+<meta property="og:updated_time" content="2018-04-07T13:59:32.377Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis一级缓存">
 <meta name="twitter:description" content="Mybatis一级缓存Mybatis 提供了一级缓存方案来优化在数据库会话中重复查询的问题。实现方式是每个 SqlSession 中都持有自己的缓存。     一级缓存有两种级别：       SESSION 级别，在一个 Mybatis 会话中执行的所有语句，都会共享这个缓存。 STATEMENT 级别，缓存只对当前执行的 statement 有效。       每个 SqlSession 中拥">
@@ -375,7 +375,7 @@
 <li><strong>对于某个 Select Statement，根据该 Statement 生成一个 key。</strong></li>
 <li><strong>判断在 LocalCache 中，该key是否有对应的数据存在。</strong></li>
 <li><strong>如果命中，跳过数据库查询，将缓存中数据返回。</strong></li>
-<li><strong>若果没有命中<br> 4.1 去数据库查询数据<br> 4.2 将 key 和数据库查询结果作为 key 和 value，放入 LocalCache（LocalCache维护一个 hashmap）<br> 4.3 将查询数据返回</strong></li>
+<li><strong>若果没有命中<br> 4.1 去数据库查询数据<br> 4.2 将 key 和数据库查询结果作为键值对，放入LocalCache（LocalCache维护一个 hashmap）<br> 4.3 将查询数据返回</strong></li>
 <li><strong>判断缓存级别是否为 STATEMENT 级别，如果是，清空本地缓存。</strong></li>
 </ol>
 
