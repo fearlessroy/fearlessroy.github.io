@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="常量折叠 请看以下一段代码: 1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] arg">
+<meta name="description" content="常量折叠 请看以下一段代码:">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中的常量折叠">
 <meta property="og:url" content="http://yoursite.com/2018/03/25/constantsFolding/index.html">
 <meta property="og:site_name" content="罗伊日常">
-<meta property="og:description" content="常量折叠 请看以下一段代码: 1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] arg">
+<meta property="og:description" content="常量折叠 请看以下一段代码:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-25T09:51:18.994Z">
+<meta property="og:updated_time" content="2018-04-10T01:54:50.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的常量折叠">
-<meta name="twitter:description" content="常量折叠 请看以下一段代码: 1234567891011121314151617181920212223242526272829303132public class TestFinal &amp;#123;	/**	 * 知识点： 针对基本类型和String的常量折叠优化	 * @return :2,100,200,test	 */	public static void main(String[] arg">
+<meta name="twitter:description" content="常量折叠 请看以下一段代码:">
 
 
 
@@ -353,7 +353,7 @@
 
       
         <h2 id="常量折叠"><a href="#常量折叠" class="headerlink" title="常量折叠"></a>常量折叠</h2><ul>
-<li>请看以下一段代码:</li>
+<li>请看以下一段代码:<a id="more"></a></li>
 <li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFinal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 知识点： 针对基本类型和String的常量折叠优化</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> :2,100,200,test</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(Test1.a);</span><br><span class="line">		System.out.println(Test2.a);</span><br><span class="line">		System.out.println(Test3.a);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test1</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> Integer a = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"2"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test2</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> a = <span class="number">200</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"3"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> String a = <span class="string">"test"</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"4"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
