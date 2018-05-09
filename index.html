@@ -335,7 +335,7 @@
           
           
 title: OpenresetyWeb框架Lor路由转发date: 2018-05-09 14:10:07tags: Lor
-categories: Openresty介绍Lor是一个运行在OpenResty上的使用Lua编写的Web框架。 它兼顾开发效率和运行时性能， 可用于快速开发API S
+categories: Openresty介绍Lor是一个运行在OpenResty上的使用Lua编写的Web框架。 它兼顾开发效率和运行时性能， 可用于快速开发API Server和传统Web页面应用本文主要是介绍Lor利用Openresty特性，也可以说是Nginx特
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -483,7 +483,7 @@ categories: Openresty介绍Lor是一个运行在OpenResty上的使用Lua编写�
       
         
           
-          介绍openresty使用lua-resty-mysql模块，连接MySql数据库123456789101112131415161718This Lua library takes advantage of ngx_lua&apos;s cosocket API, which ensures 100
+          介绍openresty使用lua-resty-mysql模块，连接MySql数据库123456789101112131415161718This Lua library takes advantage of ngx_lua&apos;s cosocket API, which ensures 100% nonblocking behavior.```      该模块是100%非阻塞的。### 使
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -609,7 +609,7 @@ categories: Openresty介绍Lor是一个运行在OpenResty上的使用Lua编写�
       
         
           
-          现象在SpringBoot中使用 @RequestMapping 和 @PathVariable时：1234@GetMapping ("userInfo/&#123;userName&#125;")public Result getLoginErrorCount(@PathVariable Stri
+          现象在SpringBoot中使用 @RequestMapping 和 @PathVariable时：1234@GetMapping ("userInfo/&#123;userName&#125;")public Result getLoginErrorCount(@PathVariable String userName) &#123;	return Result.ok(userName);&#1
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -907,7 +907,9 @@ categories: Openresty介绍Lor是一个运行在OpenResty上的使用Lua编写�
 一级缓存有两种级别：     
 
 SESSION 级别，在一个 Mybatis 会话中执行的所有语句，都会共享这个缓存。
-STATEMENT
+STATEMENT 级别，缓存只对当前执行的 statement 有效。     
+
+每个 SqlSession 中拥
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1055,7 +1057,7 @@ STATEMENT
       
         
           
-          最左前缀原理全列匹配按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。最左前缀匹配当查询条件精确匹配索引的左边连续一个或几个列时，注意是连续
+          最左前缀原理全列匹配按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。最左前缀匹配当查询条件精确匹配索引的左边连续一个或几个列时，注意是连续，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1204,7 +1206,7 @@ STATEMENT
         
           
           MySQL索引实现在MySQL中，索引属于存储引擎级别概念。
-MyISAM索引实现MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放数据记录地址。MyISAM索引文件仅仅保存数据记录地址MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出
+MyISAM索引实现MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放数据记录地址。MyISAM索引文件仅仅保存数据记录地址MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。MyISAM辅助索引与主索引在结构上
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1352,7 +1354,7 @@ MyISAM索引实现MyISAM引擎使用B+Tree作为索引结构，叶节点的data�
       
         
           
-          索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是
+          索引的本质MySQL官方对索引的定义：索引(Index)是帮助MySQL高效获得数据的数据结构。索引本质：一种数据结构。查询数据是数据库的主要功能之一，最基本的查找算法是顺序查找，时间复杂度为O(N)，在数据量很大的情况下，这种算法的效率就会很低。那我们可以使用二分查找、二叉树查找等高效的算法，但是这些算法对检索的数据都有要求，如二分查找要求数据有序。但是数据本身不可能完全满足这些要求，所以，在数
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1648,7 +1650,8 @@ MyISAM索引实现MyISAM引擎使用B+Tree作为索引结构，叶节点的data�
         
           
           正常来说数据库记录不会直接硬删除(直接delete掉)，而是使用软删除，如在数据库表中增加一个字段，is_deleted，最简单的设置：0为未删除，1为已经被删除。
-如果表中有UNIQUE字段col，使用软删除可能导致之后相同的字段值无法插入，因为这个字段在表中已经被使用且是唯一的，那这时候应该定义
+如果表中有UNIQUE字段col，使用软删除可能导致之后相同的字段值无法插入，因为这个字段在表中已经被使用且是唯一的，那这时候应该定义联合索引唯一约束即 UNIQUE KEY col_INDEX(col,is_deleted)。
+不过
           ...
           <!--noindex-->
           <div class="post-button text-center">
