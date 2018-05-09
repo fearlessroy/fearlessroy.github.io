@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="罗伊日常">
 <meta property="og:description" content="比较数值用equals Integer 是 int 的包装类 包装类与基本类型的转换代码结构是类似的，每一种包装类都有一个静态方法 valueOf(), 接受基本类型，返回引用类型，也都有一个实例方法 xxxValue() 返回对应的基本类型。 将基本类型转换为包装类的过程，称为 “装箱”，而将包装类转换为基本类型的过程，则称为“拆箱”，Java 5 以后引入了自动装箱技术。    自动装箱/拆箱">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-25T07:56:28.823Z">
+<meta property="og:updated_time" content="2018-05-09T10:54:06.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Integer类型判断是否相等不要使用 ==">
 <meta name="twitter:description" content="比较数值用equals Integer 是 int 的包装类 包装类与基本类型的转换代码结构是类似的，每一种包装类都有一个静态方法 valueOf(), 接受基本类型，返回引用类型，也都有一个实例方法 xxxValue() 返回对应的基本类型。 将基本类型转换为包装类的过程，称为 “装箱”，而将包装类转换为基本类型的过程，则称为“拆箱”，Java 5 以后引入了自动装箱技术。    自动装箱/拆箱">
@@ -356,7 +356,8 @@
 <li>Integer 是 int 的包装类</li>
 <li>包装类与基本类型的转换代码结构是类似的，每一种包装类都有一个静态方法 valueOf(), 接受基本类型，返回引用类型，也都有一个实例方法 xxxValue() 返回对应的基本类型。</li>
 <li>将基本类型转换为包装类的过程，称为 “装箱”，而将包装类转换为基本类型的过程，则称为“拆箱”，Java 5 以后引入了自动装箱技术。   </li>
-<li><p>自动装箱/拆箱功能是Java编译器提供的能力。           </p>
+<li><p>自动装箱/拆箱功能是Java编译器提供的能力。  </p>
+<a id="more"></a>         
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">int</span> b = a ;</span><br></pre></td></tr></table></figure>           
 <p>上面的代码会被替换成:              </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer a  = Integer.valueOf(<span class="number">100</span>);</span><br><span class="line"><span class="keyword">int</span> b = a.intValue();</span><br></pre></td></tr></table></figure>             

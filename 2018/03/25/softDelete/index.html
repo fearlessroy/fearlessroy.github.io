@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="罗伊日常">
 <meta property="og:description" content="正常来说数据库记录不会直接硬删除(直接delete掉)，而是使用软删除，如在数据库表中增加一个字段，is_deleted，最简单的设置：0为未删除，1为已经被删除。 如果表中有UNIQUE字段col，使用软删除可能导致之后相同的字段值无法插入，因为这个字段在表中已经被使用且是唯一的，那这时候应该定义联合索引唯一约束即 UNIQUE KEY col_INDEX(col,is_deleted)。 不过">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-25T07:56:08.198Z">
+<meta property="og:updated_time" content="2018-05-09T10:51:01.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库软删除策略">
 <meta name="twitter:description" content="正常来说数据库记录不会直接硬删除(直接delete掉)，而是使用软删除，如在数据库表中增加一个字段，is_deleted，最简单的设置：0为未删除，1为已经被删除。 如果表中有UNIQUE字段col，使用软删除可能导致之后相同的字段值无法插入，因为这个字段在表中已经被使用且是唯一的，那这时候应该定义联合索引唯一约束即 UNIQUE KEY col_INDEX(col,is_deleted)。 不过">
@@ -354,7 +354,7 @@
       
         <p>正常来说数据库记录不会直接硬删除(直接delete掉)，而是使用软删除，如在数据库表中增加一个字段，<strong>is_deleted</strong>，最简单的设置：0为未删除，1为已经被删除。</p>
 <p>如果表中有UNIQUE字段col，使用软删除可能导致之后相同的字段值无法插入，因为这个字段在表中已经被使用且是唯一的，那这时候应该定义<strong>联合索引唯一约束即 UNIQUE KEY col_INDEX(col,is_deleted)。</strong></p>
-<p>不过这样会出现新的问题，col被第二次软删除，is_deleted为1的也被占用，进一步<strong>解决方法是把is_deleted定义为0未删除，非0表删除，非0可能是一个自增ID或者一个随机的值如时间戳、UUID等，那这样就能保证唯一性。</strong></p>
+<p>不过这样会出现新的问题，col被第二次软删除，is_deleted为1的也被占用，进一步<strong>解决方法是把is_deleted定义为0未删除，非0表删除，非0可能是一个自增ID或者一个随机的值如时间戳、UUID等，那这样就能保证唯一性。</strong><br><a id="more"></a></p>
 
       
     </div>

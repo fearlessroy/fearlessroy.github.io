@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="罗伊日常">
 <meta property="og:description" content="最左前缀原理全列匹配按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。最左前缀匹配当查询条件精确匹配索引的左边连续一个或几个列时，注意是连续，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T07:22:21.319Z">
+<meta property="og:updated_time" content="2018-05-09T10:49:47.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL索引使用策略">
 <meta name="twitter:description" content="最左前缀原理全列匹配按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。最左前缀匹配当查询条件精确匹配索引的左边连续一个或几个列时，注意是连续，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。">
@@ -352,7 +352,7 @@
       
 
       
-        <h2 id="最左前缀原理"><a href="#最左前缀原理" class="headerlink" title="最左前缀原理"></a>最左前缀原理</h2><p><strong>全列匹配</strong><br>按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。<br><strong>最左前缀匹配</strong><br>当查询条件精确匹配索引的左边<strong>连续一个或几个列</strong>时，注意是<strong>连续</strong>，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。<br><strong>查询条件没有指定索引第一列</strong><br>由于不是最左前缀，索引这样的查询用不到索引。<br><strong>匹配某列前缀字符串</strong><br>如果通配符%不出现在开头，则可以用到索引，但根据具体情况不同可能只会用其中一个前缀。<br><strong>范围查询</strong><br>范围列可以用到索引（必须是最左前缀），但是范围列后面的列无法用到索引。同时，索引最多用于一个范围列，因此如果查询条件中有两个范围列则无法全用到索引。<br><strong>BETWEEN</strong><br>“BETWEEN”实际上相当于“IN”，也就是说实际是多值精确匹配。<br><strong>查询条件中含有函数或表达式</strong><br>如果查询条件中含有函数或表达式，则MySQL不会为这列使用索引。       </p>
+        <h2 id="最左前缀原理"><a href="#最左前缀原理" class="headerlink" title="最左前缀原理"></a>最左前缀原理</h2><p><strong>全列匹配</strong><br>按照索引中所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。这里有一点需要注意，理论上索引对顺序是敏感的，但是MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。<br><strong>最左前缀匹配</strong><br>当查询条件精确匹配索引的左边<strong>连续一个或几个列</strong>时，注意是<strong>连续</strong>，索引可以被用到。查询条件用到了索引中列的精确匹配，但是中间某个条件未提供，只会用到最左匹配的索引。<br><a id="more"></a><br><strong>查询条件没有指定索引第一列</strong><br>由于不是最左前缀，索引这样的查询用不到索引。<br><strong>匹配某列前缀字符串</strong><br>如果通配符%不出现在开头，则可以用到索引，但根据具体情况不同可能只会用其中一个前缀。<br><strong>范围查询</strong><br>范围列可以用到索引（必须是最左前缀），但是范围列后面的列无法用到索引。同时，索引最多用于一个范围列，因此如果查询条件中有两个范围列则无法全用到索引。<br><strong>BETWEEN</strong><br>“BETWEEN”实际上相当于“IN”，也就是说实际是多值精确匹配。<br><strong>查询条件中含有函数或表达式</strong><br>如果查询条件中含有函数或表达式，则MySQL不会为这列使用索引。       </p>
 <h2 id="索引选择性"><a href="#索引选择性" class="headerlink" title="索引选择性"></a>索引选择性</h2><p>索引的选择性（Selectivity），是指不重复的索引值（也叫基数，Cardinality）与表记录数（#T）的比值：<br>Index Selectivity = Cardinality / #T<br>显然选择性的取值范围为(0, 1]，选择性越高的索引价值越大，这里可以思考一下性别列是否可以选择作为索引。</p>
 
       

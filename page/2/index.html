@@ -354,12 +354,11 @@
 
       
         
-          
-          
-== 比较地址，Integer 重写equals()方法，是对值的比较
-int和integer(无论new否)比，都为true，因为会把Integer自动装箱，然后由于重写了equals 所以比较的是值。
-两个都是非new出来的Integer，如果数在-128到127之间，则是true,否则为fa
-          ...
+          <ul>
+<li>== 比较地址，Integer 重写equals()方法，是对值的比较</li>
+<li>int和integer(无论new否)比，都为true，因为会把Integer自动装箱，然后由于重写了equals 所以比较的是值。</li>
+<li>两个都是非new出来的Integer，如果数在-128到127之间，则是true,否则为false，Java在编译Integer i2 = 128的时候,被翻译成-&gt; Integer i = Integer.valueOf(128);JDK本身会对-128到127之间的数进行缓存。</li>
+<li>Integer 与 new Integer() 不会相等,因为他们在做比较的时候，不会经历拆箱过程，i的引用指向栈，而j指向堆，他们的内存地址不一样，所以为false。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/03/25/comparedInterge/#more" rel="contents">
@@ -505,12 +504,11 @@ int和integer(无论new否)比，都为true，因为会把Integer自动装箱，
 
       
         
-          
-          比较数值用equals
-Integer 是 int 的包装类
-包装类与基本类型的转换代码结构是类似的，每一种包装类都有一个静态方法 valueOf(), 接受基本类型，返回引用类型，也都有一个实例方法 xxxValue() 返回对应的基本类型。
-将基本类型转换为包装类的过程，称为 “装箱”，而将包装
-          ...
+          <h2 id="比较数值用equals"><a href="#比较数值用equals" class="headerlink" title="比较数值用equals"></a>比较数值用equals</h2><ul>
+<li>Integer 是 int 的包装类</li>
+<li>包装类与基本类型的转换代码结构是类似的，每一种包装类都有一个静态方法 valueOf(), 接受基本类型，返回引用类型，也都有一个实例方法 xxxValue() 返回对应的基本类型。</li>
+<li>将基本类型转换为包装类的过程，称为 “装箱”，而将包装类转换为基本类型的过程，则称为“拆箱”，Java 5 以后引入了自动装箱技术。   </li>
+<li><p>自动装箱/拆箱功能是Java编译器提供的能力。  </p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/03/15/compareInteger/#more" rel="contents">
@@ -656,10 +654,8 @@ Integer 是 int 的包装类
 
       
         
-          
-          字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”
-问题描述：当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新update_time，理论上我们在业务控制的时候是不需要设置update_ti
-          ...
+          <h2 id="字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”"><a href="#字段策略-0-”忽略判断”-1-”非-NULL-判断”-2-”非空判断”" class="headerlink" title="字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”"></a>字段策略 0:”忽略判断”,1:”非 NULL 判断”),2:”非空判断”</h2><ul>
+<li><p>问题描述：<br>当字段策略为 0 “忽略判断” 的时候，如果实体和数据库有字段是需要自动更新的，例如update_time,更新某条记录的时候自动刷新<code>update_time</code>，理论上我们在业务控制的时候是不需要设置update_time的，利用数据库特性就好，但是在该字段策略下，业务逻辑要更新字段（没有主动设置 <code>update_time</code>），这时候因为忽略判断，数据库(我这里是MySql)是<strong>不会去更新update_time的，即使这个字段在数据库中是这样定义的：<code>update_time</code> datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE</strong>，在这种字段策略下，该字段会被设为null，具体的执行语句时insert into table(….,update_time) values(…,null)。   </p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/03/13/mybatis-plus/#more" rel="contents">
@@ -805,10 +801,18 @@ Integer 是 int 的包装类
 
       
         
-          
-          openresty快速开始##简介Openresty是一个基于Nginx和Lua的高性能Web平台，内部集成了大量精良的Lua库，第三方模块以及大多数依赖项，可以方便搭建超高并发、扩展性极好的Web应用、Web服务和动态网关。
-Mac OS X 安装推荐使用homebrew:brew install
-          ...
+          <h1 id="openresty快速开始"><a href="#openresty快速开始" class="headerlink" title="openresty快速开始"></a>openresty快速开始</h1><p>##简介<br>Openresty是一个基于Nginx和Lua的高性能Web平台，内部集成了大量精良的Lua库，第三方模块以及大多数依赖项，可以方便搭建超高并发、扩展性极好的Web应用、Web服务和动态网关。</p>
+<h2 id="Mac-OS-X-安装"><a href="#Mac-OS-X-安装" class="headerlink" title="Mac OS X 安装"></a>Mac OS X 安装</h2><p>推荐使用homebrew:<br>brew install openresty/brew/openresty</p>
+<p>安装完后配置环境变量，我用的是zsh，所以：<br>vim ~/.zshrc<br>PATH=/usr/local/Cellar/openresty/1.13.6.1/bin:$PATH<br>保存后source ~/.zshrc使配置生效</p>
+<h2 id="第一个web页面"><a href="#第一个web页面" class="headerlink" title="第一个web页面"></a>第一个web页面</h2><ul>
+<li>创建工程文件：mkdir ~/first-work</li>
+<li>创建日志和配置文件：cd ~/first-work; mkdir logs/ conf/</li>
+<li><p>编写配置文件：</p>
+<img src="/2018/02/14/openresty-quick-start/nginx.png">
+</li>
+<li><p>启动Server<br>  openresty -p ‘pwd’ -c conf/nginx.conf<br>  这里pwd是你的工程文件地址</p>
+</li>
+<li>打开浏览器访问localhost:8080,便可以看到hello,world
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/02/14/openresty-quick-start/#more" rel="contents">
@@ -954,11 +958,10 @@ Mac OS X 安装推荐使用homebrew:brew install
 
       
         
-          
-          域名注册在国内可以通过阿里云或者腾讯云注册域名。本人域名在腾讯云购入，所以本篇文章以腾讯云为例。购买注册按流程走即可，各个平台相差应该也不大。
-为域名添加解析修改默认的解析方式，添加 @ 和 www 的DNS记录：
-添加加CNAME文件在本地hexo源码的source目录创建一个CNAME文件，文件
-          ...
+          <h2 id="域名注册"><a href="#域名注册" class="headerlink" title="域名注册"></a>域名注册</h2><p>在国内可以通过阿里云或者腾讯云注册域名。<br>本人域名在腾讯云购入，所以本篇文章以腾讯云为例。<br>购买注册按流程走即可，各个平台相差应该也不大。</p>
+<h2 id="为域名添加解析"><a href="#为域名添加解析" class="headerlink" title="为域名添加解析"></a>为域名添加解析</h2><p>修改默认的解析方式，添加 @ 和 www 的DNS记录：<br><img src="/2018/01/29/binddomain/DNS.png"></p>
+<h2 id="添加加CNAME文件"><a href="#添加加CNAME文件" class="headerlink" title="添加加CNAME文件"></a>添加加CNAME文件</h2><p>在本地hexo源码的source目录创建一个CNAME文件，文件内容是域名，我的域名是 fearlessroy.net。<br>这里不推荐直接在Github仓库创建CNAME文件，因为在下次部署内容之前忘记同步文件的话会无法访问我们的域名。<br>hexo g &amp; hexo d之后，Github上便会有我们的文件。<br><img src="/2018/01/29/binddomain/CNAME.png"></p>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><p>等待一会(域名解析生效的时间，在添加域名解析时会有提示)，访问注册的域名，便会出现和原先的二级域名一样的页面，至此博客绑定域名成功。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/01/29/binddomain/#more" rel="contents">

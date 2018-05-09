@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="罗伊日常">
 <meta property="og:description" content="MySQL索引实现在MySQL中，索引属于存储引擎级别概念。 MyISAM索引实现MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放数据记录地址。MyISAM索引文件仅仅保存数据记录地址MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。MyISAM辅助索引与主索引在结构上">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T07:03:12.587Z">
+<meta property="og:updated_time" content="2018-05-09T10:50:11.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL索引实现">
 <meta name="twitter:description" content="MySQL索引实现在MySQL中，索引属于存储引擎级别概念。 MyISAM索引实现MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放数据记录地址。MyISAM索引文件仅仅保存数据记录地址MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。MyISAM辅助索引与主索引在结构上">
@@ -353,7 +353,7 @@
 
       
         <h2 id="MySQL索引实现"><a href="#MySQL索引实现" class="headerlink" title="MySQL索引实现"></a>MySQL索引实现</h2><p>在MySQL中，索引属于存储引擎级别概念。</p>
-<h3 id="MyISAM索引实现"><a href="#MyISAM索引实现" class="headerlink" title="MyISAM索引实现"></a>MyISAM索引实现</h3><p><strong>MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放数据记录地址。</strong><br><strong>MyISAM索引文件仅仅保存数据记录地址</strong><br><strong>MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。</strong><br>MyISAM辅助索引与主索引在结构上没有区别，只是主索引要求key唯一，辅助索引key可以重复。</p>
+<h3 id="MyISAM索引实现"><a href="#MyISAM索引实现" class="headerlink" title="MyISAM索引实现"></a>MyISAM索引实现</h3><p><strong>MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放数据记录地址。</strong><br><strong>MyISAM索引文件仅仅保存数据记录地址</strong><br><strong>MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。</strong><br>MyISAM辅助索引与主索引在结构上没有区别，只是主索引要求key唯一，辅助索引key可以重复。<br><a id="more"></a></p>
 <h3 id="InnoDB索引实现"><a href="#InnoDB索引实现" class="headerlink" title="InnoDB索引实现"></a>InnoDB索引实现</h3><p>InnoDB也使用B+Tree作为索引结构。<br><strong>InnoDB数据文件本身就是索引文件</strong>，MyISAM索引文件和数据文件是分离的，索引文件仅仅保留数据记录的地址，而在InnoDB中，表数据本身就是按照B+Tree组织的一个索引结构，叶节点data域保留了完整的数据记录，这个索引的key是表的主键，因此，<strong>InnoDB表数据文件本身就是主索引，</strong>这种索引叫做聚集索引，MyISAM是非聚集索引。<br><strong>InnoDB本身要按照主键聚集，所以InnoDB要求表必须要有主键，如果没有显示指定，MySQL会自动选择一个可以唯一标识数据记录的列作为主键，如果不存在这种列，MySQL自动为InnoDB表生成一个隐含字段作为主键。</strong><br><strong>InnoDB的辅助索引data域记录主键的值而不是地址</strong><br>辅助索引搜索需要检索<strong>两遍索引</strong>：首先检索辅助索引获得主键，然后在用主键到主索引中检索获得记录。<br>InnoDB不建议使用过长的字段作为主键，因为所有辅助索引都引用主索引，过长的主索引会使得辅助索引过大。<br>另外InnoDB也不建议使用非单调的字段作为主键，因为InnoDB数据文件本身是一棵B+Tree，使用非单调的主键在插入新纪录时数据文件为了维护B+Tree的特性而频繁分裂调整，十分低效。  </p>
 
       
