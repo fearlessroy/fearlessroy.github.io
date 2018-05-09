@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Lor," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍Lor是一个运行在OpenResty上的使用Lua编写的Web框架。 它兼顾开发效率和运行时性能， 可用于快速开发API Server和传统Web页面应用本文主要是介绍Lor利用Openresty特性，也可以说是Nginx特性，进行转发的一种方式，所以暂不对Lor框架做过多描述。 使用LorMiddleWare进行路由转发123456789101112local lor = require(&apos;">
+<meta name="keywords" content="Lor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenresetyWeb框架Lor路由转发">
+<meta property="og:url" content="http://yoursite.com/2018/05/09/OpenresetyWeb框架Lor路由转发/index.html">
+<meta property="og:site_name" content="罗伊日常">
+<meta property="og:description" content="介绍Lor是一个运行在OpenResty上的使用Lua编写的Web框架。 它兼顾开发效率和运行时性能， 可用于快速开发API Server和传统Web页面应用本文主要是介绍Lor利用Openresty特性，也可以说是Nginx特性，进行转发的一种方式，所以暂不对Lor框架做过多描述。 使用LorMiddleWare进行路由转发123456789101112local lor = require(&apos;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-09T06:53:21.955Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenresetyWeb框架Lor路由转发">
+<meta name="twitter:description" content="介绍Lor是一个运行在OpenResty上的使用Lua编写的Web框架。 它兼顾开发效率和运行时性能， 可用于快速开发API Server和传统Web页面应用本文主要是介绍Lor利用Openresty特性，也可以说是Nginx特性，进行转发的一种方式，所以暂不对Lor框架做过多描述。 使用LorMiddleWare进行路由转发123456789101112local lor = require(&apos;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/09/OpenresetyWeb框架Lor路由转发/"/>
+
+
+
+
+
+  <title>OpenresetyWeb框架Lor路由转发 | 罗伊日常</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">罗伊日常</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Geek journey</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/OpenresetyWeb框架Lor路由转发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fearlessroy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="罗伊日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenresetyWeb框架Lor路由转发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T14:10:07+08:00">
+                2018-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Openresty/" itemprop="url" rel="index">
+                    <span itemprop="name">Openresty</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Lor是一个运行在OpenResty上的使用Lua编写的Web框架。 它兼顾开发效率和运行时性能， 可用于快速开发API Server和传统Web页面应用<br>本文主要是介绍Lor利用Openresty特性，也可以说是Nginx特性，进行转发的一种方式，所以暂不对Lor框架做过多描述。</p>
+<h3 id="使用LorMiddleWare进行路由转发"><a href="#使用LorMiddleWare进行路由转发" class="headerlink" title="使用LorMiddleWare进行路由转发"></a>使用LorMiddleWare进行路由转发</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> lor = <span class="built_in">require</span>(<span class="string">'lor.index'</span>)</span><br><span class="line"><span class="keyword">local</span> router = <span class="built_in">require</span>(<span class="string">'app.router'</span>)</span><br><span class="line"><span class="keyword">local</span> app = lor(&#123;&#125;)</span><br><span class="line"></span><br><span class="line">app:get(<span class="string">"/user/:userName"</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res, next)</span></span></span><br><span class="line">    res:send(<span class="string">"lor user"</span>)</span><br><span class="line"><span class="keyword">end</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> serverForward =<span class="built_in">require</span>(<span class="string">'app.middleware.server-forward'</span>)</span><br><span class="line">app:use(serverForward())</span><br><span class="line">router(app)</span><br><span class="line">app:run()</span><br></pre></td></tr></table></figure>
+<p>这段代码是最简单的Lor实例，根据nginx.conf配置，可对l/user/:userName进行快速访问。<br>但此时我们假设我们并不希望该路由，访问Lor-server，而是希望将请求转发到其他模块或者说另一种实现方式，那么，此时的lor-server就可以当做是一个Nginx模块，进行反向代理。</p>
+<h3 id="serverForward逻辑"><a href="#serverForward逻辑" class="headerlink" title="serverForward逻辑"></a>serverForward逻辑</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> cjson = <span class="built_in">require</span>(<span class="string">'cjson'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">table_is_empty</span><span class="params">(t)</span></span></span><br><span class="line">    <span class="keyword">return</span> t == <span class="literal">nil</span> <span class="keyword">or</span> <span class="built_in">_G</span>.<span class="built_in">next</span>(t) == <span class="literal">nil</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> ngx_methods = &#123;</span><br><span class="line">    [<span class="string">'GET'</span>] = ngx.HTTP_GET,</span><br><span class="line">    [<span class="string">'POST'</span>] = ngx.HTTP_POST,</span><br><span class="line">    [<span class="string">'PUT'</span>] = ngx.HTTP_PUT,</span><br><span class="line">    [<span class="string">'DELETE'</span>] = ngx.HTTP_DELETE,</span><br><span class="line">    [<span class="string">'HEAD'</span>] = ngx.HTTP_HEAD,</span><br><span class="line">    [<span class="string">'OPTIONS'</span>] =  ngx.HTTP_OPTIONS,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">is_need_proxy</span><span class="params">(uri)</span></span></span><br><span class="line">    <span class="keyword">local</span> proxy_tbl = &#123;</span><br><span class="line">        <span class="string">'/user/'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(proxy_tbl) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">string</span>.<span class="built_in">match</span>(uri, v) <span class="keyword">then</span></span><br><span class="line">            <span class="comment">--ngx.log(ngx.INFO, 'DEBUG ---------- need proxy, ', uri)</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">work_forward</span><span class="params">()</span></span></span><br><span class="line">    <span class="comment">--[[ req指的就是request对象，它包装了OpenResty收到的HTTP请求参数，并附带了一些方法来完成session、cookie数据交互，路由处理等其他后续操作</span></span><br><span class="line"><span class="comment">         res，它包装了OpenResty处理HTTP响应的一些API，并附带了一些方法来完成诸如模板渲染、重定向、json返回、session/cookie处理等其他后续操作</span></span><br><span class="line"><span class="comment">         next, 不带参数，直接调用next()，则会将请求传给下一个调用者，继续后面的处理</span></span><br><span class="line"><span class="comment">               带参数，如next(“something”)，这时会跳过之后的调用，直接去寻找能匹配的app:erroruse定义的”错误处理插件”</span></span><br><span class="line"><span class="comment">    ]]</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(req, res, next)</span></span></span><br><span class="line">        <span class="keyword">local</span> uri = req.<span class="built_in">path</span></span><br><span class="line">        ngx.<span class="built_in">log</span>(ngx.ERR,<span class="string">"req_path: "</span>,uri)</span><br><span class="line">        <span class="keyword">local</span> method = <span class="built_in">string</span>.<span class="built_in">upper</span>(req.method) <span class="comment">-- 获得请求方法</span></span><br><span class="line">        <span class="keyword">local</span> uri_args = ngx.req.get_uri_args() <span class="comment">-- 获得请求参数</span></span><br><span class="line">        <span class="keyword">local</span> isForward = is_need_proxy(uri)</span><br><span class="line">        <span class="keyword">if</span> isForward <span class="keyword">then</span></span><br><span class="line">            <span class="comment">--local userInfo = req.session.get('userinfo')</span></span><br><span class="line">            <span class="comment">--ngx.req.set_header("Authorization", "Basic " .. ngx.encode_base64(userInfo.id))  -- 认证</span></span><br><span class="line">            <span class="keyword">local</span> proxy_uri = <span class="string">'/proxy'</span> .. uri .. (<span class="keyword">not</span> table_is_empty(uri_args) <span class="keyword">and</span> (<span class="string">'?'</span> .. ngx.encode_args(uri_args)) <span class="keyword">or</span> <span class="string">''</span>) <span class="comment">--拼接转发uri并带上参数</span></span><br><span class="line">            ngx.<span class="built_in">log</span>(ngx.ERR,<span class="string">"===============proxy_uri: "</span>, proxy_uri)</span><br><span class="line">            <span class="keyword">if</span> req.headers[<span class="string">"Content-Type"</span>] <span class="keyword">and</span> <span class="built_in">string</span>.<span class="built_in">find</span>(req.headers[<span class="string">"Content-Type"</span>], <span class="string">"multipart"</span>) <span class="keyword">then</span> <span class="comment">-- 是否有multipart类型content-Type</span></span><br><span class="line">                ngx.req.read_body()</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">local</span> resp = ngx.location.capture(proxy_uri, &#123; method = ngx_methods[method] &#125;) <span class="comment">-- nginx自身的子查询，需要借助 proxy_pass 发出 HTTP 连接信号</span></span><br><span class="line">            <span class="keyword">if</span> resp.truncated <span class="keyword">then</span></span><br><span class="line">                ngx.<span class="built_in">log</span>(ngx.ERR, <span class="string">'proxy failed,proxy_uri '</span>, proxy_uri)</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(resp.header) <span class="keyword">do</span></span><br><span class="line">                    res:set_header(k, v)  <span class="comment">-- set response header</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                res:<span class="built_in">status</span>(resp.<span class="built_in">status</span>)   <span class="comment">-- set response status</span></span><br><span class="line">                <span class="keyword">return</span> res:_send(resp.body)  <span class="comment">-- response body</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">next</span>()  <span class="comment">-- 路由不在转发列表中，不做转发，继续请求流程</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> work_forward</span><br></pre></td></tr></table></figure>
+<h4 id="nginx-conf"><a href="#nginx-conf" class="headerlink" title="nginx.conf"></a>nginx.conf</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location /proxy/user/ &#123;</span><br><span class="line">            set $service http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>;</span><br><span class="line">            rewrite /proxy/user/(.*) /user/$<span class="number">1</span> <span class="keyword">break</span>;</span><br><span class="line">            proxy_pass $service;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>我在本地的8080端口启动了SpringBoot服务，来接收由lor-server转发过来的请求。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> proxy_uri = <span class="string">'/proxy'</span> .. uri .. (<span class="keyword">not</span> table_is_empty(uri_args) <span class="keyword">and</span> (<span class="string">'?'</span> .. ngx.encode_args(uri_args)) <span class="keyword">or</span> <span class="string">''</span>) <span class="comment">--拼接转发uri并带上参数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> resp = ngx.location.capture(proxy_uri, &#123; method = ngx_methods[method] &#125;) <span class="comment">-- nginx自身的子查询，需要借助 proxy_pass 发出 HTTP 连接信号</span></span><br></pre></td></tr></table></figure>
+<p>这两行代码是核心，将需要转发的初始请求封装成proxy-uri，通过ngx.location.capture发起自请求，配合proxy_pass,将请求转发到spring服务，最终将response返回。<br>这是一个典型的反向代理，用户请求lor-server，但本质上逻辑处理实在SpringBoot服务，lor-server只做转发。作为用户，也是无法感知这一点的。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://lor.sumory.com/api/" target="_blank" rel="noopener">http://lor.sumory.com/api/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lor/" rel="tag"># Lor</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/08/openresty使用MySql/" rel="next" title="openresty使用MySql">
+                <i class="fa fa-chevron-left"></i> openresty使用MySql
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Fearlessroy</p>
+              <p class="site-description motion-element" itemprop="description">技术输出和个人感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fearlessroy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yunfeiroy@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用LorMiddleWare进行路由转发"><span class="nav-number">2.</span> <span class="nav-text">使用LorMiddleWare进行路由转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#serverForward逻辑"><span class="nav-number">3.</span> <span class="nav-text">serverForward逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nginx-conf"><span class="nav-number">3.1.</span> <span class="nav-text">nginx.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">3.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fearlessroy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
