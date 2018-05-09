@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="介绍openresty使用lua-resty-mysql模块，连接MySql数据库1This Lua library takes advantage of ngx_lua&amp;apos;s cosocket API, which ensures 100% nonblocking behavior. 该模块是100%非阻塞的。 使用引用模块1local mysql = require(&quot;resty.my">
+<meta name="description" content="介绍openresty使用lua-resty-mysql模块，连接MySql数据库1This Lua library takes advantage of ngx_lua&amp;apos;s cosocket API, which ensures 100% nonblocking behavior. 该模块是100%非阻塞的。 使用引用模块1local mysql = require(&quot;resty.m">
 <meta name="keywords" content="MySql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Openresty使用MySql">
 <meta property="og:url" content="http://yoursite.com/2018/05/08/openresty使用MySql/index.html">
 <meta property="og:site_name" content="罗伊日常">
-<meta property="og:description" content="介绍openresty使用lua-resty-mysql模块，连接MySql数据库1This Lua library takes advantage of ngx_lua&amp;apos;s cosocket API, which ensures 100% nonblocking behavior. 该模块是100%非阻塞的。 使用引用模块1local mysql = require(&quot;resty.my">
+<meta property="og:description" content="介绍openresty使用lua-resty-mysql模块，连接MySql数据库1This Lua library takes advantage of ngx_lua&amp;apos;s cosocket API, which ensures 100% nonblocking behavior. 该模块是100%非阻塞的。 使用引用模块1local mysql = require(&quot;resty.m">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-09T09:45:34.701Z">
+<meta property="og:updated_time" content="2018-05-09T09:48:53.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Openresty使用MySql">
-<meta name="twitter:description" content="介绍openresty使用lua-resty-mysql模块，连接MySql数据库1This Lua library takes advantage of ngx_lua&amp;apos;s cosocket API, which ensures 100% nonblocking behavior. 该模块是100%非阻塞的。 使用引用模块1local mysql = require(&quot;resty.my">
+<meta name="twitter:description" content="介绍openresty使用lua-resty-mysql模块，连接MySql数据库1This Lua library takes advantage of ngx_lua&amp;apos;s cosocket API, which ensures 100% nonblocking behavior. 该模块是100%非阻塞的。 使用引用模块1local mysql = require(&quot;resty.m">
 
 
 
@@ -352,7 +352,8 @@
       
 
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>openresty使用lua-resty-mysql模块，连接MySql数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This Lua library takes advantage of ngx_lua&apos;s cosocket API, which ensures 100% nonblocking behavior.</span><br></pre></td></tr></table></figure></p>
+        <a id="more"></a>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>openresty使用lua-resty-mysql模块，连接MySql数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This Lua library takes advantage of ngx_lua&apos;s cosocket API, which ensures 100% nonblocking behavior.</span><br></pre></td></tr></table></figure></p>
 <p>该模块是100%非阻塞的。</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="引用模块"><a href="#引用模块" class="headerlink" title="引用模块"></a>引用模块</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> mysql = <span class="built_in">require</span>(<span class="string">"resty.mysql"</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="创建一个MySql数据库连接对象及设置过期时间"><a href="#创建一个MySql数据库连接对象及设置过期时间" class="headerlink" title="创建一个MySql数据库连接对象及设置过期时间"></a>创建一个MySql数据库连接对象及设置过期时间</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- init mysql</span></span><br><span class="line"><span class="keyword">local</span> db, err = mysql:new()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> db <span class="keyword">then</span></span><br><span class="line">    ngx.say(<span class="string">"new mysql error : "</span>, err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">db:set_timeout(<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
